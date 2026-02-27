@@ -20,7 +20,7 @@ public class ItemService {
 
     @Transactional(readOnly = true)
     public List<ItemDTO> getAllItems() {
-        return itemRepository.findByIsActiveTrue()
+        return itemRepository.findAll()
                 .stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
@@ -56,8 +56,7 @@ public class ItemService {
     public void deleteItem(Long id) {
         Item item = itemRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Item not found with id: " + id));
-        item.setIsActive(false); // Soft delete
-        itemRepository.save(item);
+        itemRepository.delete(item);
     }
 
     @Transactional(readOnly = true)

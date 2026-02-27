@@ -1,12 +1,12 @@
 package com.aditi.backend.repository;
 
 import com.aditi.backend.model.Item;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.awt.print.Pageable;
 import java.util.List;
 
 @Repository
@@ -17,6 +17,9 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     // Find active items
     List<Item> findByIsActiveTrue();
+
+    // Find active items including legacy rows where isActive is null
+    List<Item> findByIsActiveTrueOrIsActiveIsNull();
 
     // Find by name and active status
     List<Item> findByNameContainingIgnoreCaseAndIsActiveTrue(String name);
