@@ -2,7 +2,7 @@ services:
   - type: web
     name: backend-app
     runtime: docker
-    rootDir: .
+    rootDir: backend
     dockerfilePath: ./Dockerfile
     plan: free
     autoDeploy: true
